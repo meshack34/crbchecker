@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from datetime import datetime
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import RegisterForm
 
 def home_view(request):
     testimonials = [
@@ -14,3 +17,15 @@ def home_view(request):
         'year': datetime.now().year,
         'testimonials': testimonials
     })
+
+
+def register(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Account created successfully! You can now log in.")
+            return redirect("login")  # Replace with your login url
+    else:
+        form = RegisterForm()
+    return render(request, "main/register.html", {"form": form})
