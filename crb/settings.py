@@ -114,3 +114,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",  # your static folder
 ]
+
+AUTH_USER_MODEL = 'main.CustomUser'
