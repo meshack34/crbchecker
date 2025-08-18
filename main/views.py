@@ -3,6 +3,36 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import RegisterForm
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+
+def register(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Account created successfully! You can now log in.")
+            return redirect("login")  # Replace with your login url
+    else:
+        form = RegisterForm()
+    return render(request, "main/register.html", {"form": form})
+
+def user_login(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect("home")  # change to your homepage
+        else:
+            messages.error(request, "Invalid email or password")
+    return render(request, "main/login.html")
+
+def user_logout(request):
+    logout(request)
+    return redirect("login")
 
 def home_view(request):
     testimonials = [
@@ -18,14 +48,3 @@ def home_view(request):
         'testimonials': testimonials
     })
 
-
-def register(request):
-    if request.method == "POST":
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Account created successfully! You can now log in.")
-            return redirect("login")  # Replace with your login url
-    else:
-        form = RegisterForm()
-    return render(request, "main/register.html", {"form": form})
