@@ -110,10 +110,17 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+
 STATIC_URL = '/static/'
+
+# This tells Django to also look in the parent "static" folder
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  
+    BASE_DIR / "static",
 ]
+
+# Only needed when you deploy (collectstatic will dump everything here)
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 AUTH_USER_MODEL = 'main.CustomUser'
 LOGIN_URL = "login"

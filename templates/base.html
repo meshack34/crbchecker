@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>{% block title %}CRB{% endblock %}</title>
+    <title>{% block title %}CRB Status Checker{% endblock %}</title>
 
     <!-- Google font (close match to PDF) -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -15,11 +15,12 @@
     <!-- NAVBAR -->
     <header class="site-header">
         <div class="wrap">
-            <div class="brand">
-                <a href="{% url 'home' %}">
-                    <img src="{% static 'images/logo.png' %}" alt="CRB Logo" class="logo">
-                </a>
-            </div>
+             <div class="brand">
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'images/logo.PNG' %}" alt="CRB Logo" class="logo">
+                        <span>CRB Check</span>
+                    </a>
+                   </div>
 
             <nav class="main-nav" aria-label="Main navigation">
                 <ul>
@@ -47,7 +48,7 @@
     <footer class="site-footer">
         <div class="wrap footer-grid">
             <div class="footer-brand">
-                <img src="{% static 'images/logo-footer.png' %}" alt="CRB Logo" class="logo-footer">
+                <img src="{% static 'images/logo.PNG' %}" alt="CRB Logo" class="logo-footer">
                 <p class="muted">Trusted credit reference services across Kenya.</p>
             </div>
 
