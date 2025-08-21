@@ -11,5 +11,6 @@ urlpatterns = [
     path("solutions/", views.solutions_view, name="solutions"),
     path("about/", views.about_view, name="about"),
     path("contact/", views.contact_view, name="contact"),
+    path("login_viewm/", views.login_viewm, name="login_viewm"),
 ]
 # crb/settings.py

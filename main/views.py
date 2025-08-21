@@ -6,6 +6,16 @@ from .forms import RegisterForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.shortcuts import render
+
+def login_viewm(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        # (You can later add authentication logic here)
+        print(email, password)  # for debugging
+    return render(request, "main/log.html")
+
 
 def register(request):
     if request.method == "POST":
