@@ -1,0 +1,20 @@
+/* Wrapper takes full screen */
+.login-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;  /* align card to the left */
+  min-height: 100vh;
+  background: #f6f9;   /* page background */
+  padding-left: 100px;   /* push card 100px from left */
+}
+
+/* Card s */
+.login-card {
+  background: #cf0d57;   /* white background */
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
