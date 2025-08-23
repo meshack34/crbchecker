@@ -22,7 +22,9 @@ body {
   margin: 0;
   background: #f9fafb;
   color: var(--text);
+  padding-top: 70px;  /* prevents content hiding under navbar */
 }
+
 
 .wrap {
   width: 90%;
@@ -91,12 +93,16 @@ a:hover { text-decoration: underline; }
 .site-header {
   background: #EAF0FD; 
   color: #333;
-  position: sticky;
+  position: fixed;   /* fixed instead of sticky */
   top: 0;
-  z-index: 100;
+  left: 0;
+  width: 100%;       /* make it span full screen */
+  z-index: 1000;     /* higher so it stays above content */
   box-shadow: 0 2px 6px rgba(9,30,66,0.08);
   border-bottom: 1px solid var(--card-border);
 }
+
+
 .site-header .wrap {
   display: flex;
   align-items: center;
@@ -104,8 +110,22 @@ a:hover { text-decoration: underline; }
   gap: 20px;
   padding: 8px 0;
 }
-.brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 1.05rem; color: var(--text); }
-.brand img, .logo { height: 20px; display: block; }
+.brand {
+  display: flex;
+  align-items: center;   /* keeps logo and text same level */
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.brand img.logo {
+  height: 36px;         
+  width: auto;
+  display: block;
+  object-fit: contain;  
+}
+
 .logo { height: 46px; }
 .main-nav ul {
   display: flex; gap: 22px; margin: 0; padding: 0; list-style: none;
