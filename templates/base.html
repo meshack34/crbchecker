@@ -46,44 +46,49 @@
         {% block content %}{% endblock %}
     </main>
 
-    <!-- FOOTER -->
-    <footer class="site-footer">
-        <div class="wrap footer-grid">
-            <div class="footer-brand">
-                <img src="{% static 'images/logo.PNG' %}" alt="CRB Logo" class="logo-footer">
-                <p class="muted">Trusted credit reference services across Kenya.</p>
-            </div>
+ <footer class="footer">
+  <div class="footer-container">
+    <!-- Left Logo / Description -->
+    <div class="footer-brand">
+      <div class="footer-logo">🛡️ <span>CRB Check</span></div>
+      <p>Your trusted partner in credit monitoring and identity protection</p>
+    </div>
 
-            <div class="footer-links">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Press</a></li>
-                </ul>
-            </div>
+    <!-- Links -->
+    <div class="footer-links">
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Guidelines</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Security</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-            <div class="footer-links">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Privacy</a></li>
-                </ul>
-            </div>
+  <!-- Bottom Line -->
+  <div class="footer-bottom">
+    <p>© 2025 CRB Check. All rights reserved.</p>
+  </div>
+</footer>
 
-            <div class="footer-contact">
-                <h4>Contact</h4>
-                <p>Phone: +254 700 000000</p>
-                <p>Email: info@crb.co.ke</p>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="wrap">
-                <p>&copy; {{ year }} CRB. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    
 </body>
 </html>
