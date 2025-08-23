@@ -53,3 +53,24 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.email})"
+
+
+from django.db import models
+from django.conf import settings
+
+class ReportPurpose(models.Model):
+    PURPOSE_CHOICES = [
+        ("loan", "Loan Application"),
+        ("employment", "Employment"),
+        ("housing", "Housing/Rental"),
+        ("business", "Business"),
+        ("personal", "Personal Review"),
+        ("legal", "Legal Matters"),
+    ]
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    purpose = models.CharField(max_length=50, choices=PURPOSE_CHOICES)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.email} - {self.get_purpose_display()}"

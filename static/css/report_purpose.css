@@ -1,0 +1,76 @@
+body {
+    font-family: "Inter", sans-serif;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.purpose-container {
+    text-align: center;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 600px;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.purpose-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.purpose-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.purpose-card:hover {
+    border-color: #0d6efd;
+    background: #f0f7ff;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]:checked + .purpose-card {
+    border-color: #0d6efd;
+    background: #e0f0ff;
+}
+
+.btn-generate {
+    background: #6ea8fe;
+    color: white;
+    border: none;
+    padding: 1rem;
+    width: 100%;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-generate:hover {
+    background: #0d6efd;
+}

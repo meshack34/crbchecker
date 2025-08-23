@@ -1,0 +1,49 @@
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="register-wrapper">
+  <div class="register-card">
+    <!-- Heading -->
+    <h2>Need CRB Report</h2>
+    <p>Get your credit report now in just minutes</p>
+
+    <!-- Register Form -->
+ <form method="post">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+
+  {% for field in form %}
+    <div class="form-group">
+      {{ field }}
+      {% if field.errors %}
+        <div class="error-text">
+          {{ field.errors|striptags }}
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+
+  <div class="terms">
+    {{ form.terms }}
+    <label for="id_terms">I agree to the Terms of Service and Privacy Policy</label>
+  </div>
+
+  <button type="submit" class="btn-primary">Create Account →</button>
+</form>
+
+
+    <!-- Footer -->
+    <p class="footer-text">
+      Already have an account?
+      <a href="{% url 'login' %}">Sign in</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

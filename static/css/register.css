@@ -1,0 +1,151 @@
+/* Full page wrapper */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
+.register-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;               /* full screen */
+  background: #1e2a97;         /* solid deep blue */
+  padding: 1rem;               /* safe spacing */
+}
+
+/* Card */
+/* Ensure the card never escapes the wrapper */
+.register-card {
+  background: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* keeps inputs 100% width */
+  text-align: center;
+}
+
+
+/* Heading */
+.register-card h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.register-card p {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 1.8rem;
+}
+
+/* Two-column row (first/last/surname) */
+.form-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.form-row input {
+  flex: 1;
+}
+
+/* Input with icon */
+.form-group {
+  position: relative;
+  margin-bottom: 0.9rem;
+}
+
+.register-card input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.6rem; /* space for icon */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.2s ease-in-out;
+}
+
+.register-card input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* Icon left */
+.form-group i {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 0.95rem;
+}
+
+/* Password toggle (eye icon) */
+.form-group .toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+  font-size: 1rem;
+}
+
+/* Terms section */
+
+
+.terms {
+  display: flex;
+  align-items: center;   /* vertical centering */
+  gap: 0.5rem;           /* spacing between checkbox and label */
+  font-size: 0.85rem;
+  margin: 0.7rem 0 1.2rem;
+  color: #444;
+}
+
+.terms input[type="checkbox"] {
+  margin: 0; /* reset default offset */
+}
+/* .terms input {
+  margin-right: 6px;
+} */
+
+/* Button */
+.btn-primary {
+  width: 100%;
+  padding: 0.95rem;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+/* Footer */
+.footer-text {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.footer-text a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-text a:hover {
+  text-decoration: underline;
+}

@@ -110,20 +110,21 @@ a:hover { text-decoration: underline; }
   gap: 20px;
   padding: 8px 0;
 }
-.brand {
+
+.brand a {
   display: flex;
-  align-items: center;   /* keeps logo and text same level */
-  gap: 8px;
+  align-items: center;  /* vertical center */
+  text-decoration: none;
+  gap: 8px;             /* space between logo & text */
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   color: var(--text);
 }
 
 .brand img.logo {
-  height: 36px;         
+  height: 32px;
   width: auto;
   display: block;
-  object-fit: contain;  
 }
 
 .logo { height: 46px; }

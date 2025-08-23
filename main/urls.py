@@ -6,11 +6,10 @@ urlpatterns = [
     path("register/", views.register, name="register"),
     path("login/", views.user_login, name="login"),
     path("logout/", views.user_logout, name="logout"),
+
+    path("report-purpose/", views.select_report_purpose, name="dashboard"),
+    # path("generate-report/", views.generate_report, name="generate_report"),  # placeholder
+
     
-    path("services/", views.services_view, name="services"),
-    path("solutions/", views.solutions_view, name="solutions"),
-    path("about/", views.about_view, name="about"),
-    path("contact/", views.contact_view, name="contact"),
-    path("login_viewm/", views.login_viewm, name="login_viewm"),
 ]
 # crb/settings.py

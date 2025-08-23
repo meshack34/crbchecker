@@ -1,0 +1,161 @@
+/* =======================
+   GLOBAL STYLES
+   ======================= */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: #1e2a97; /* solid deep blue background */
+}
+
+/* =======================
+   WRAPPER
+   ======================= */
+.register-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 1rem;
+}
+
+/* =======================
+   CARD
+   ======================= */
+.register-card {
+  background: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+}
+
+/* =======================
+   HEADING
+   ======================= */
+.register-card h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.register-card p {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 1.8rem;
+}
+
+/* =======================
+   FORM STYLING
+   ======================= */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Horizontal row for first/last/surname */
+.form-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+  margin-bottom: 0; /* remove double spacing */
+}
+
+/* Each field wrapper */
+.form-group {
+  position: relative;
+  margin-bottom: 0.9rem;
+}
+
+/* Inputs */
+.register-form input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.register-form input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* =======================
+   TERMS CHECKBOX
+   ======================= */
+.terms {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  margin: 0.7rem 0 1.2rem;
+  color: #444;
+  text-align: left;
+}
+
+.terms input[type="checkbox"] {
+  margin: 0;
+  width: auto;
+}
+
+/* =======================
+   ERROR TEXT
+   ======================= */
+.error-text {
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  color: #d9534f; /* Bootstrap danger red */
+  text-align: left;
+}
+
+/* =======================
+   BUTTON
+   ======================= */
+.btn-primary {
+  width: 100%;
+  padding: 0.95rem;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+/* =======================
+   FOOTER
+   ======================= */
+.footer-text {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.footer-text a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-text a:hover {
+  text-decoration: underline;
+}

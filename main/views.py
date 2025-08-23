@@ -8,14 +8,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import render
 
-def login_viewm(request):
-    if request.method == "POST":
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-        # (You can later add authentication logic here)
-        print(email, password)  # for debugging
-    return render(request, "main/log.html")
-
 
 def register(request):
     if request.method == "POST":
@@ -23,19 +15,22 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Account created successfully! You can now log in.")
-            return redirect("login")  # Replace with your login url
+            return redirect("login")
+        else:
+            print(form.errors)  # 👈 Debug
     else:
         form = RegisterForm()
     return render(request, "main/register.html", {"form": form})
+
 
 def user_login(request):
     if request.method == "POST":
         email = request.POST.get("email")
         password = request.POST.get("password")
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect("home")  # change to your homepage
+            return redirect("dashboard")  # change to your homepage
         else:
             messages.error(request, "Invalid email or password")
     return render(request, "main/login.html")
@@ -58,14 +53,22 @@ def home_view(request):
         'testimonials': testimonials
     })
 
-def services_view(request):
-    return render(request, "main/services.html")
 
-def solutions_view(request):
-    return render(request, "main/solutions.html")
 
-def about_view(request):
-    return render(request, "main/about.html")
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .forms import ReportPurposeForm
 
-def contact_view(request):
-    return render(request, "main/contact.html")
+@login_required
+def select_report_purpose(request):
+    if request.method == "POST":
+        form = ReportPurposeForm(request.POST)
+        if form.is_valid():
+            purpose = form.save(commit=False)
+            purpose.user = request.user
+            purpose.save()
+            # redirect to next step (report generation page)
+            return redirect("report_purpose")
+    else:
+        form = ReportPurposeForm()
+    return render(request, "main/report_purpose.html", {"form": form})
