@@ -58,18 +58,6 @@
         </form>
     </div>
 
-    <!-- 🔹 Loading Modal -->
-    <div id="loadingModal" class="modal">
-        <div class="loading-box">
-            <h3>Generating Your Report</h3>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <span id="progressText">0%</span>
-            <p>Please wait while we analyze your credit information and generate your comprehensive report...</p>
-        </div>
-    </div>
-
     <!-- 🔹 Report Modal -->
     <div id="reportModal" class="modal">
         <div class="modal-content">
@@ -170,32 +158,17 @@
 
 <script>
 const form = document.getElementById("purposeForm");
-const loadingModal = document.getElementById("loadingModal");
 const reportModal = document.getElementById("reportModal");
 const standardModal = document.getElementById("standardPaymentModal");
 const premiumModal = document.getElementById("premiumPaymentModal");
 const closeBtns = document.querySelectorAll(".close");
-const progressFill = document.getElementById("progressFill");
-const progressText = document.getElementById("progressText");
 
-// Show loading then report modal
+// Show Report Modal
 form.addEventListener("submit", function(e) {
     const selected = document.querySelector('input[name="purpose"]:checked');
-    if (selected) {
+    if (selected && selected.value === "loan") {
         e.preventDefault(); 
-        loadingModal.style.display = "flex"; // show loading modal
-
-        let progress = 0;
-        const interval = setInterval(() => {
-            progress += 5;
-            progressFill.style.width = progress + "%";
-            progressText.textContent = progress + "%";
-            if (progress >= 100) {
-                clearInterval(interval);
-                loadingModal.style.display = "none";
-                reportModal.style.display = "block";
-            }
-        }, 150);
+        reportModal.style.display = "block";
     }
 });
 
@@ -215,14 +188,12 @@ closeBtns.forEach(btn => {
         reportModal.style.display = "none";
         standardModal.style.display = "none";
         premiumModal.style.display = "none";
-        loadingModal.style.display = "none";
     };
 });
 window.onclick = function(event) {
     if (event.target == reportModal) reportModal.style.display = "none";
     if (event.target == standardModal) standardModal.style.display = "none";
     if (event.target == premiumModal) premiumModal.style.display = "none";
-    if (event.target == loadingModal) loadingModal.style.display = "none";
 }
 
 // Copy Till Number
@@ -286,44 +257,6 @@ function showToast(msg, type="info") {
 .premium-theme { border-top: 5px solid #facc15; background: #fffbea; }
 .premium-theme h2 { color: #ca8a04; }
 .premium-btn { background: #facc15; color: black; }
-
-/* Loading Modal */
-.loading-box {
-  background: white;
-  padding: 25px;
-  border-radius: 10px;
-  width: 380px;
-  margin: auto;
-  text-align: center;
-}
-.progress-bar {
-  width: 100%;
-  background: #e5e7eb;
-  border-radius: 5px;
-  height: 8px;
-  margin: 15px 0;
-  overflow: hidden;
-}
-.progress-fill {
-  background: #3b82f6;
-  height: 100%;
-  width: 0%;
-  transition: width 0.2s;
-}
-#progressText {
-  font-size: 14px;
-  color: #333;
-}
-.modal {
-  display: none;   /* hidden on page load */
-  position: fixed;
-  z-index: 9999;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
-  justify-content: center;
-  align-items: center;
-}
 </style>
 
 </body>

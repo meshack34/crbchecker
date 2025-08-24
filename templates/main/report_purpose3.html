@@ -58,19 +58,7 @@
         </form>
     </div>
 
-    <!-- 🔹 Loading Modal -->
-    <div id="loadingModal" class="modal">
-        <div class="loading-box">
-            <h3>Generating Your Report</h3>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <span id="progressText">0%</span>
-            <p>Please wait while we analyze your credit information and generate your comprehensive report...</p>
-        </div>
-    </div>
-
-    <!-- 🔹 Report Modal -->
+    <!-- 🔹 Popup Modal -->
     <div id="reportModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -121,141 +109,109 @@
         </div>
     </div>
 
-   <!-- 🔹 Standard Payment Modal -->
-<div id="standardPaymentModal" class="modal">
-  <div class="modal-content pay-modal standard-theme">
+   <!-- Payment Modal -->
+<div id="paymentModal" class="modal">
+  <div class="modal-content pay-modal">
     <span class="close">&times;</span>
-    <h2>Pay KES 187.00</h2>
+
+    <h2>Pay KES <span id="payAmount">187.00</span></h2>
     <p>Follow steps below</p>
 
     <ol class="steps">
       <li><span>1</span> Go to M-PESA</li>
       <li><span>2</span> Select "Lipa na M-PESA" > "Buy Goods"</li>
-      <li><span>3</span> Enter Till <strong>4158516</strong> <button class="copy-btn" onclick="copyTill()">📋</button></li>
-      <li><span>4</span> Enter Amount: KES 187.00</li>
+      <li><span>3</span> Enter Till <strong id="tillNumber">4158516</strong> 
+          <button class="copy-btn" onclick="copyTill()">📋</button>
+      </li>
+      <li><span>4</span> Enter Amount: KES <span id="amountText">187.00</span></li>
       <li><span>5</span> Enter PIN & Confirm</li>
     </ol>
 
-    <label><strong>Paste M-PESA Message</strong></label>
-    <textarea id="mpesaMsgStandard" placeholder="Paste your M-PESA message here..."></textarea>
+    <label for="mpesaMsg"><strong>Paste M-PESA Message</strong></label>
+    <textarea id="mpesaMsg" placeholder="Paste your M-PESA message here..."></textarea>
 
-    <button class="btn-validate" onclick="validateMpesa('187.00','mpesaMsgStandard')">Validate Payment</button>
+    <button id="validateBtn" class="btn-validate">Validate Payment</button>
   </div>
 </div>
 
-<!-- 🔹 Premium Payment Modal -->
-<div id="premiumPaymentModal" class="modal">
-  <div class="modal-content pay-modal premium-theme">
-    <span class="close">&times;</span>
-    <h2>Pay KES 237.00 <small>(Premium)</small></h2>
-    <p>Follow steps below</p>
-
-    <ol class="steps">
-      <li><span>1</span> Go to M-PESA</li>
-      <li><span>2</span> Select "Lipa na M-PESA" > "Buy Goods"</li>
-      <li><span>3</span> Enter Till <strong>4158516</strong> <button class="copy-btn" onclick="copyTill()">📋</button></li>
-      <li><span>4</span> Enter Amount: KES 237.00</li>
-      <li><span>5</span> Enter PIN & Confirm</li>
-    </ol>
-
-    <label><strong>Paste M-PESA Message</strong></label>
-    <textarea id="mpesaMsgPremium" placeholder="Paste your M-PESA message here..."></textarea>
-
-    <button class="btn-validate premium-btn" onclick="validateMpesa('237.00','mpesaMsgPremium')">Validate Payment</button>
-  </div>
-</div>
-
-<!-- 🔹 Toast -->
+<!-- Toast Container -->
 <div id="toast"></div>
 
 <script>
 const form = document.getElementById("purposeForm");
-const loadingModal = document.getElementById("loadingModal");
 const reportModal = document.getElementById("reportModal");
-const standardModal = document.getElementById("standardPaymentModal");
-const premiumModal = document.getElementById("premiumPaymentModal");
+const paymentModal = document.getElementById("paymentModal");
 const closeBtns = document.querySelectorAll(".close");
-const progressFill = document.getElementById("progressFill");
-const progressText = document.getElementById("progressText");
 
-// Show loading then report modal
+// Step 1: Show Report Modal when loan selected
 form.addEventListener("submit", function(e) {
     const selected = document.querySelector('input[name="purpose"]:checked');
-    if (selected) {
+    if (selected && selected.value === "loan") {
         e.preventDefault(); 
-        loadingModal.style.display = "flex"; // show loading modal
-
-        let progress = 0;
-        const interval = setInterval(() => {
-            progress += 5;
-            progressFill.style.width = progress + "%";
-            progressText.textContent = progress + "%";
-            if (progress >= 100) {
-                clearInterval(interval);
-                loadingModal.style.display = "none";
-                reportModal.style.display = "block";
-            }
-        }, 150);
+        reportModal.style.display = "block";
     }
 });
 
-// Open Standard / Premium Modals
+// Step 2: Open Payment Modal on Standard/Premium click
 document.querySelector(".btn-standard").addEventListener("click", function() {
     reportModal.style.display = "none";
-    standardModal.style.display = "block";
+    document.getElementById("payAmount").textContent = "187.00";
+    document.getElementById("amountText").textContent = "187.00";
+    paymentModal.style.display = "block";
 });
 document.querySelector(".btn-premium").addEventListener("click", function() {
     reportModal.style.display = "none";
-    premiumModal.style.display = "block";
+    document.getElementById("payAmount").textContent = "237.00";
+    document.getElementById("amountText").textContent = "237.00";
+    paymentModal.style.display = "block";
 });
 
-// Close all modals
+// Step 3: Close modals
 closeBtns.forEach(btn => {
     btn.onclick = () => {
         reportModal.style.display = "none";
-        standardModal.style.display = "none";
-        premiumModal.style.display = "none";
-        loadingModal.style.display = "none";
+        paymentModal.style.display = "none";
     };
 });
 window.onclick = function(event) {
     if (event.target == reportModal) reportModal.style.display = "none";
-    if (event.target == standardModal) standardModal.style.display = "none";
-    if (event.target == premiumModal) premiumModal.style.display = "none";
-    if (event.target == loadingModal) loadingModal.style.display = "none";
+    if (event.target == paymentModal) paymentModal.style.display = "none";
 }
 
 // Copy Till Number
 function copyTill() {
-    const till = "4158516";
+    const till = document.getElementById("tillNumber").textContent;
     navigator.clipboard.writeText(till);
     showToast("Till number copied!", "success");
 }
 
-// Validate Mpesa Message
-function validateMpesa(amount, textareaId) {
-    const msg = document.getElementById(textareaId).value.trim();
-    const till = "4158516";
-    const regex = new RegExp(`.*KES\\s${amount}.*${till}.*`, "i");
-
-    if (regex.test(msg)) {
-        showToast("✅ Payment Verified Successfully!", "success");
-    } else {
-        showToast("❌ Invalid M-PESA message.", "error");
-    }
-}
-
-// Toast
+// Toast Notification
 function showToast(msg, type="info") {
     const toast = document.getElementById("toast");
     toast.textContent = msg;
     toast.className = "show " + type;
     setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
 }
+
+// Validate M-PESA Message
+document.getElementById("validateBtn").addEventListener("click", function() {
+    const msg = document.getElementById("mpesaMsg").value.trim();
+    const till = "4158516";
+    const amount = document.getElementById("payAmount").textContent;
+
+    const regex = new RegExp(`.*KES\\s${amount}.*${till}.*`, "i");
+
+    if (regex.test(msg)) {
+        showToast("✅ Payment Verified Successfully!", "success");
+        // AJAX/redirect goes here
+    } else {
+        showToast("❌ Invalid M-PESA message. Please input the correct one", "error");
+    }
+});
 </script>
 
 <style>
-/* Toast */
+/* Toast Notification */
 #toast {
   visibility: hidden;
   min-width: 280px;
@@ -273,57 +229,13 @@ function showToast(msg, type="info") {
   opacity: 0;
   transition: opacity 0.5s, top 0.5s;
 }
-#toast.show { visibility: visible; opacity: 1; top: 40px; }
+#toast.show {
+  visibility: visible;
+  opacity: 1;
+  top: 40px;
+}
 #toast.success { background-color: #16a34a; }
 #toast.error { background-color: #dc2626; }
-
-/* Standard Theme */
-.standard-theme { border-top: 5px solid #3b82f6; }
-.standard-theme h2 { color: #3b82f6; }
-.btn-validate { background: #3b82f6; color: white; }
-
-/* Premium Theme */
-.premium-theme { border-top: 5px solid #facc15; background: #fffbea; }
-.premium-theme h2 { color: #ca8a04; }
-.premium-btn { background: #facc15; color: black; }
-
-/* Loading Modal */
-.loading-box {
-  background: white;
-  padding: 25px;
-  border-radius: 10px;
-  width: 380px;
-  margin: auto;
-  text-align: center;
-}
-.progress-bar {
-  width: 100%;
-  background: #e5e7eb;
-  border-radius: 5px;
-  height: 8px;
-  margin: 15px 0;
-  overflow: hidden;
-}
-.progress-fill {
-  background: #3b82f6;
-  height: 100%;
-  width: 0%;
-  transition: width 0.2s;
-}
-#progressText {
-  font-size: 14px;
-  color: #333;
-}
-.modal {
-  display: none;   /* hidden on page load */
-  position: fixed;
-  z-index: 9999;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
-  justify-content: center;
-  align-items: center;
-}
 </style>
 
 </body>
